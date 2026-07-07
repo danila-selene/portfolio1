@@ -10,21 +10,6 @@ interface SectionWrapperProps {
   delay?: number;
 }
 
-const sectionVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: "easeOut",
-    },
-  },
-};
-
 export default function SectionWrapper({
   children,
   id,
@@ -34,6 +19,15 @@ export default function SectionWrapper({
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   const controls = useAnimation();
+
+  const sectionVariants: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: "easeOut", delay },
+    },
+  };
 
   useEffect(() => {
     if (isInView) {
@@ -48,16 +42,7 @@ export default function SectionWrapper({
       className={`section-padding ${className}`}
       initial="hidden"
       animate={controls}
-      variants={{
-        ...sectionVariants,
-        visible: {
-          ...sectionVariants.visible,
-          transition: {
-            ...(sectionVariants.visible as Record<string, unknown>).transition,
-            delay,
-          },
-        },
-      }}
+      variants={sectionVariants}
     >
       <div className="section-container">{children}</div>
     </motion.section>

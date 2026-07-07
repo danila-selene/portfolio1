@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Code2, Briefcase, Users, Trophy, BookOpen } from "lucide-react";
 import SectionWrapper from "./SectionWrapper";
 
@@ -13,7 +13,7 @@ const stats = [
   { icon: BookOpen, label: "Years Learning", value: "3+" },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
@@ -22,7 +22,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
